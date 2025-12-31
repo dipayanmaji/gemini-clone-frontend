@@ -15,22 +15,29 @@ const ContextProvider = (props) => {
 
   const onSent = async (prompt) => {
     const finalPrompt = prompt || input;
+    if (!finalPrompt) return;
+
+    const userMessage = { role: "user", text: finalPrompt };
+
+    // 1️⃣ Add user message first
+    const updatedMessages = [...messages, userMessage];
+    setMessages(updatedMessages);
 
     setLoading(true);
     setShowResult(true);
     setRecentPrompt(finalPrompt);
+    setInput("");
 
     try {
-      const response = await run(finalPrompt);
+      // 2️⃣ Send FULL history to backend
+      const response = await run(updatedMessages);
+
+      const aiMessage = { role: "model", text: response };
+
+      // 3️⃣ Append AI reply
+      setMessages((prev) => [...prev, aiMessage]);
       setResultData(response);
       setLoading(false);
-      setInput("");
-      setMessages(prev => [
-        ...prev,
-        { role: "user", text: finalPrompt },
-        { role: "model", text: response }
-      ]);
-
     } catch (error) {
       console.error(error);
       setLoading(false);
@@ -49,6 +56,7 @@ const ContextProvider = (props) => {
     resultData,
     input,
     setInput,
+    messages,
   };
 
   return (
