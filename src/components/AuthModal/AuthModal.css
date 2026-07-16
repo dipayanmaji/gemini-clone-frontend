@@ -1,0 +1,23 @@
+.auth-backdrop { position: fixed; inset: 0; z-index: 20; display: grid; place-items: center; padding: 20px; background: rgba(11, 20, 34, .46); backdrop-filter: blur(4px); }
+.auth-modal { position: relative; width: min(100%, 410px); padding: 32px; border: 1px solid #e0e7f0; border-radius: 20px; background: #fff; box-shadow: 0 24px 70px rgba(0, 0, 0, .25); }
+.auth-kicker { margin: 0 0 8px; color: #1a73e8; font-size: 13px; font-weight: 700; }
+.auth-modal h2 { margin: 0; color: #1f2a3a; font-size: 27px; }
+.auth-copy { margin: 10px 0 24px; color: #68778b; font-size: 14px; line-height: 1.5; }
+.auth-modal label { display: grid; gap: 7px; margin-top: 15px; color: #455468; font-size: 13px; font-weight: 650; }
+.auth-modal input { width: 100%; padding: 11px 12px; border: 1px solid #ccd7e4; border-radius: 9px; background: #fff; color: #1f2a3a; outline: none; }
+.password-field { position: relative; display: block; }
+.password-field input { padding-right: 54px; }
+.password-field button { position: absolute; top: 50%; right: 7px; display: grid; width: 30px; height: 30px; padding: 5px; border: 0; border-radius: 6px; background: transparent; color: #286fc7; cursor: pointer; transform: translateY(-50%); }
+.password-field button svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.8; }
+.password-field button:hover { background: #eaf2ff; }
+.auth-modal input:focus { border-color: #4c8ce6; box-shadow: 0 0 0 3px rgba(76, 140, 230, .14); }
+.auth-submit { width: 100%; margin-top: 22px; padding: 12px; border: 0; border-radius: 9px; background: #1a73e8; color: #fff; font: inherit; font-weight: 650; cursor: pointer; }
+.auth-submit:disabled { opacity: .65; cursor: wait; }
+.auth-switch { width: 100%; margin-top: 14px; border: 0; background: transparent; color: #286fc7; font: inherit; font-size: 13px; cursor: pointer; }
+.auth-close { position: absolute; top: 12px; right: 14px; border: 0; background: transparent; color: #66758a; font-size: 25px; cursor: pointer; }
+.auth-status { margin: 14px 0 0; color: #a12b22; font-size: 13px; line-height: 1.4; }
+:root[data-theme="dark"] .auth-modal { border-color: #33465f; background: #1b293b; }
+:root[data-theme="dark"] .auth-modal h2, :root[data-theme="dark"] .auth-modal input { color: #edf3fc; }
+:root[data-theme="dark"] .auth-copy, :root[data-theme="dark"] .auth-modal label { color: #b7c5d6; }
+:root[data-theme="dark"] .auth-modal input { border-color: #405570; background: #152235; }
+:root[data-theme="dark"] .password-field button:hover { background: #263e60; }

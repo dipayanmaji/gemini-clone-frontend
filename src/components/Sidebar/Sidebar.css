@@ -1,64 +1,123 @@
-.sidebar{
-    height: 100vh;
-    position: sticky;
-    top: 0;
-    display: inline-flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background-color: #eceef0;
-    padding: 25px 15px ;
-}
-.sidebar img{
-    width: 20px;
-}
-.sidebar .menu{
-    display: block;
-    margin-left: 10px;
-    cursor: pointer;
-}
-.sidebar .new-chat{
-    margin-top: 50px;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 15px;
-    background-color: #dddfe3;
-    border-radius: 50px;
-    font-size: 14px;
-    color: rgb(103, 101, 101);
-    cursor: pointer;
-}
-.sidebar .new-chat:hover{
-    background-color: #b7b8b9;
-    color: #454444;
-}
-.sidebar .recent{
-    display: flex;
-    flex-direction: column;
-}
-.sidebar .recent-title{
-    margin-top: 30px;
-    margin-bottom: 20px;
-}
-.sidebar .recent-entry{
-    display: flex;
-    align-items: start;
-    gap: 10px;
-    padding: 10px;
-    padding-right: 40px;
-    border-radius: 50px;
-    color: #282828;
-    cursor: pointer;
+.sidebar {
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  width: 72px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #f0f4f9;
+  padding: 20px 10px;
+  transition: width 160ms ease;
+  overflow: hidden;
 }
 
-.sidebar .recent-entry:hover{
-    background-color: #dadada;
+.sidebar.extended { width: 260px; }
+.sidebar img { width: 20px; }
+.icon-button, .new-chat, .recent-entry, .chat-select, .delete-chat, .message-action, .stop-button, .card {
+  border: 0;
+  font: inherit;
+  cursor: pointer;
 }
-.sidebar .bottom{
-    display: flex;
-    flex-direction: column;
+.icon-button { display: inline-grid; place-items: center; background: transparent; padding: 8px; border-radius: 50%; }
+.icon-button:hover:not(:disabled) { background: #dfe3e8; }
+.menu { margin-left: 2px; }
+.new-chat {
+  margin-top: 38px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: #dce8f9;
+  border-radius: 22px;
+  color: #334155;
+  white-space: nowrap;
 }
-.sidebar .bottom-item{
-    padding-right: 10px;
-    cursor: pointer;
+.new-chat:hover { background: #c8dcf8; }
+.recent { display: flex; flex-direction: column; margin-top: 24px; gap: 2px; }
+.chat-tools { display: flex; gap: 5px; padding: 0 4px 10px; }
+.chat-tools input { min-width: 0; flex: 1; padding: 7px 8px; border: 1px solid #cfd9e5; border-radius: 8px; background: #fff; color: #243447; font: inherit; font-size: 12px; outline: none; }
+.chat-tools button, .clear-all { border: 0; border-radius: 7px; background: #dce8f9; color: #285b9f; font: inherit; font-size: 11px; cursor: pointer; }
+.chat-tools button { padding: 0 7px; }
+.recent-heading { display: flex; align-items: center; justify-content: space-between; }
+.clear-all { margin-right: 5px; padding: 4px 6px; }
+.recent-title { margin: 0 12px 8px; color: #52606d; font-size: 13px; }
+.recent-entry {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 2px;
+  border-radius: 11px;
+  background: transparent;
 }
+.chat-select {
+  min-width: 0;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px;
+  border-radius: 9px;
+  background: transparent;
+  color: #282828;
+  text-align: left;
+}
+.rename-input { min-width: 0; flex: 1; margin: 4px; padding: 7px; border: 1px solid #79a8ef; border-radius: 7px; background: #fff; color: #243447; font: inherit; font-size: 12px; outline: none; }
+.chat-actions { display: flex; align-items: center; gap: 1px; padding-right: 3px; opacity: 0; }
+.recent-entry:hover .chat-actions, .recent-entry.active .chat-actions { opacity: 1; }
+.chat-actions button { width: 23px; height: 25px; padding: 0; border: 0; border-radius: 5px; background: transparent; color: #637083; font: inherit; cursor: pointer; }
+.chat-actions button:hover { background: #cbd8e8; color: #245ba8; }
+.recent-entry span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.recent-entry:hover, .recent-entry.active { background: #dce3ea; }
+.delete-chat {
+  width: 27px;
+  height: 27px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #637083;
+  font-size: 21px;
+  line-height: 1;
+  opacity: 0;
+}
+.recent-entry:hover .delete-chat, .recent-entry.active .delete-chat { opacity: 1; }
+.delete-chat:hover { background: #f9d8d3; color: #b42318; }
+.no-chats { margin: 8px 10px; color: #7b8798; font-size: 12px; }
+.bottom { display: flex; flex-direction: column; gap: 4px; }
+.bottom-item { display: flex; align-items: center; gap: 12px; padding: 9px; color: #4b5563; white-space: nowrap; }
+@media (max-width: 640px) {
+  .sidebar {
+    position: fixed;
+    left: 0;
+    z-index: 10;
+    width: 58px;
+    padding: 16px 8px;
+    box-shadow: 2px 0 10px rgba(37, 57, 88, .05);
+  }
+  .sidebar.extended {
+    width: min(260px, 82vw);
+    box-shadow: 10px 0 28px rgba(37, 57, 88, .18);
+  }
+  .sidebar .menu { margin-left: 0; }
+  .sidebar .new-chat { margin-top: 28px; padding: 10px; }
+  .sidebar .recent { max-height: calc(100vh - 220px); overflow-y: auto; }
+  .main { min-width: 0; padding-left: 58px; }
+  .main .nav { padding-left: 18px; }
+}
+
+:root[data-theme="dark"] .sidebar { background: #151f2e; }
+:root[data-theme="dark"] .sidebar img { filter: invert(1) brightness(1.8); }
+:root[data-theme="dark"] .sidebar .new-chat { background: #263e60; color: #e4edfc; }
+:root[data-theme="dark"] .sidebar .new-chat:hover { background: #31537d; }
+:root[data-theme="dark"] .recent-title, :root[data-theme="dark"] .bottom-item { color: #b7c5d6; }
+:root[data-theme="dark"] .chat-select { color: #e2eaf5; }
+:root[data-theme="dark"] .chat-tools input, :root[data-theme="dark"] .rename-input { border-color: #405570; background: #152235; color: #e2eaf5; }
+:root[data-theme="dark"] .chat-tools button, :root[data-theme="dark"] .clear-all { background: #263e60; color: #dbe9ff; }
+:root[data-theme="dark"] .chat-actions button { color: #bdcce0; }
+:root[data-theme="dark"] .chat-actions button:hover { background: #314761; color: #e2eaff; }
+:root[data-theme="dark"] .recent-entry:hover, :root[data-theme="dark"] .recent-entry.active { background: #25364b; }
+:root[data-theme="dark"] .delete-chat { color: #b7c5d6; }
+:root[data-theme="dark"] .delete-chat:hover { background: #542d2d; color: #ffb4ab; }
